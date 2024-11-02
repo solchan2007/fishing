@@ -1,0 +1,183 @@
+{
+    "game": {
+        "fishing(낚시)": {
+            "fishing_rod(낚시대)": [
+                {
+                    "name(낚시대 이름)": "초보자 낚시대",
+                    "durability(내구도)": 100,
+                    "depth_level(수심 레벨)": "shallow"
+                },
+                {
+                    "name(낚시대 이름)": "고급 낚시대",
+                    "durability(내구도)": 200,
+                    "depth_level(수심 레벨)": "deep"
+                }
+            ],
+            "fatigue(피로도)": {
+                "increase_per_fish(물고기당 증가할 스트레스)": 10,
+                "decrease(피로도 해소)": {
+                    "sleep(잠)": -30,
+                    "apple(사과)": -10,
+                    "meal(식사)": -20
+                },
+                "penalty(패널티)": {
+                    "fatigue_half(피로도 절반 감소)": 50
+                }
+            },
+            "depth(수심)": [
+                {
+                    "level(일정 수심 레벨)": "shallow",
+                    "fish_types(물코기 종류)": [
+                        "리플멸치",
+                        "카브농어"
+                    ]
+                },
+                {
+                    "level(일정 수심 레벨)": "deep",
+                    "fish_types(물코기 종류)": [
+                        "도지상어",
+                        "비트돗돔"
+                    ]
+                }
+            ],
+            "fishing_game(물코기 잡는 방식)": [
+                {
+                    "name(물코기 이름)": "리플멸치",
+                    "pattern(물코기 패턴)": ["down", "up" ,"up"]
+                },
+              {
+                    "name(물코기 이름)": "카브농어",
+                    "pattern(물코기 패턴)": ["right", "up","left","right"]
+                },
+              {
+                    "name(물코기 이름)": "도지상어",
+                    "pattern(물코기 패턴)": ["up" , "left", "up" ,"down", "left"]
+                },
+              {
+                    "name(물코기 이름)": "비트돗돔",
+                    "pattern(물코기 패턴)": ["up", "left", "up","down", "left","right","left","right"]
+                }
+            ]
+        },
+        "fish_market(물고기 상점)": {
+            "fish_prices(물코기 가격)": [
+                {
+                    "name(물코기 이름)": "리플멸치",
+                    "coin(코인 이름)": "리플"
+                },
+                {
+                    "name(물코기 이름)": "카브농어",
+                    "coin(코인 이름)": "카브"
+                },
+                {
+                    "name(물코기 이름)": "도지상어",
+                    "coin(코인 이름)": "도지코인"
+                },
+                {
+                    "name(물코기 이름)": "비트돗돔",
+                    "coin(코인 이름)": "비트코인"
+                }
+            ]
+        },
+        "store (상점)": {
+            "items(아이템)": {
+                "food(음식)": [
+                    {
+                        "name(음식 이름)": "사과",
+                        "price(음식 가격)": 1000,
+                        "fatigue_reduction(피로도 회복량)": 10
+                    },
+                    {
+                        "name(음식 이름)": "간식",
+                        "price(음식 가격)": 1800,
+                        "fatigue_reduction(피로도 회복량)": 20
+                    }
+                ],
+                "fishing_rods_type(낚시대 종류)": [
+                    {
+                        "name(낚시대 이름)": "연습용 낚시대",
+                        "price(낚시대 가격)": 5000,
+                        "durability(낚시대 내구도)": 100
+                    },
+                    {
+                        "name(낚시대 이름)": "고급 낚시대",
+                        "price(낚시대 가격)": 20000,
+                        "durability(낚시대 내구도)": 200
+                    }
+                ]
+            },
+            "hours(상점 시간)": {
+                "open(상점 오픈 시간)": "08:00",
+                "close(상점 닫는 시간)": "18:00"
+            }
+        },
+        "inventory(인벤토리)": {
+            "slots(인벤토리 칸)": 10,
+            "equipped(장비하고 있는 아이템)": {
+                "fishing_rod(현재 낚시대)": null
+            },
+            "own_fishing_rod(보유중인 낚시대)": [],
+            "own_fish(보유중인 물코기)": [],
+            "food(현재 보유중인 음식)": []
+        },
+        "day_night_cycle(낮 밤 주기)": {
+            "based_on_real_time(실제 기반 시간)": true,
+            "date(날짜)": 1,
+            "day_time(하루 시간)": 300,
+            "day_cycle(하루 주기)": [
+                {
+                    "today_hour(시간대)": "morning",
+                    "today_second(하루가 지나가는 시간)": {
+                        "start(초)": 1,
+                        "end(초)": 100
+                    }
+                },
+                {
+                    "today_hour(시간대)": "afternoon",
+                    "today_second(하루가 지니가는 시간)": {
+                        "start(초)": 101,
+                        "end(초)": 200
+                    }
+                },
+                {
+                    "today_hour(시간대)": "night",
+                    "today_second(하루가 지가나는 시간)": {
+                        "start(초)": 201,
+                        "end(초)": 300
+                    }
+                }
+            ]
+        },
+        "ranking(랭킹)": {
+            "players(플레이어 내용)": [
+                {
+                    "username(플레이어 이름)": "fisher1",
+                    "price(플레이어 돈)": 1000,
+                    "fishing_rod": "고급 낚시대"
+                },
+                {
+                    "username(플레이어 이름)": "angler123",
+                    "price(플레이어 돈)": 800,
+                    "fishing_rod": "초보용 낚시대"
+                }
+            ]
+        },
+        "ending_conditions(엔딩 조건)": {
+            "happy_ending": {
+                "date(목표 날짜)": 30,
+                "earnings_goal(목표 금액)": 100000,
+                "all_items_purchased(모든 항목 구매)": true
+            },
+            "sad_ending": {
+                "date(목표 날짜)": 30,
+                "earnings_goal(목표 금액)": 100000,
+                "all_items_purchased(모든 항목 구매)": false
+            },
+            "bad_ending": {
+                "date(목표 날짜)": 30,
+                "earnings_goal(목표 금액)": 100000,
+                "all_items_purchased(모든 항목 구매)": false
+            }
+        }
+    }
+}

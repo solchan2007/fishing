@@ -1,0 +1,249 @@
+{
+	"player1": {
+		"username": "player1",
+		"password": "password123",
+		"price": 0,
+		"inventory": {
+			"slots": 10,
+			"fishing_rods": [
+				{
+					"name": "초보자 낚시대",
+					"durability": 95
+				}
+			],
+			"fish": [],
+			"food": [],
+			"equipped": {
+				"fishing_rod": "초보자 낚시대"
+			}
+		},
+		"hunger": 95,
+		"current_depth_level": "shallow",
+		"game_progress": {
+			"date": 0,
+			"time_of_day": "morning"
+		},
+		"ranking": {
+			"rank": 0,
+			"earnings": 0
+		}
+	},
+	"aaaa": {
+		"username": "aaaa",
+		"password": "aaaa",
+		"price": 0,
+		"inventory": {
+			"items": [
+				{
+					"name": "꽁치 통조림",
+					"type": "food",
+					"desc": "",
+					"quantity": 0
+				},
+				{
+					"name": "참치 초밥",
+					"type": "food",
+					"desc": "",
+					"quantity": 0
+				},
+				{
+					"name": "회 한점",
+					"type": "food",
+					"desc": "",
+					"quantity": 0
+				},
+				{
+					"name": "전어구이",
+					"type": "food",
+					"desc": "",
+					"quantity": 0
+				},
+				{
+					"name": "붕어빵",
+					"type": "food",
+					"desc": "",
+					"quantity": 0
+				},
+				{
+					"name": "해파리냉채",
+					"type": "food",
+					"desc": "",
+					"quantity": 0
+				},
+				{
+					"name": "똠양꿍",
+					"type": "food",
+					"desc": "",
+					"quantity": 0
+				},
+				{
+					"name": "만두",
+					"type": "food",
+					"desc": "",
+					"quantity": 0
+				},
+				{
+					"name": "월병",
+					"type": "food",
+					"desc": "",
+					"quantity": 0
+				},
+				{
+					"name": "탕후루",
+					"type": "food",
+					"desc": "",
+					"quantity": 0
+				},
+				{
+					"name": "마라탕",
+					"type": "food",
+					"desc": "",
+					"quantity": 0
+				},
+				{
+					"name": "도지농어",
+					"type": "fish",
+					"desc": "",
+					"quantity": 0
+				},
+				{
+					"name": "셀로징어(오징어)",
+					"type": "fish",
+					"desc": "",
+					"quantity": 0
+				},
+				{
+					"name": "보라나비(나비고기)",
+					"type": "fish",
+					"desc": "",
+					"quantity": 0
+				},
+				{
+					"name": "리플넙치",
+					"type": "fish",
+					"desc": "",
+					"quantity": 0
+				},
+				{
+					"name": "온동가리(흰동가리)",
+					"type": "fish",
+					"desc": "",
+					"quantity": 0
+				},
+				{
+					"name": "수이도미",
+					"type": "fish",
+					"desc": "",
+					"quantity": 0
+				},
+				{
+					"name": "에이다랑어",
+					"type": "fish",
+					"desc": "",
+					"quantity": 0
+				},
+				{
+					"name": "앱토랍스터",
+					"type": "fish",
+					"desc": "",
+					"quantity": 0
+				},
+				{
+					"name": "인젝티본장어(리본장어)",
+					"type": "fish",
+					"desc": "",
+					"quantity": 0
+				},
+				{
+					"name": "코스모스새우",
+					"type": "fish",
+					"desc": "",
+					"quantity": 0
+				},
+				{
+					"name": "펜들감펭(쏠배감펭)",
+					"type": "fish",
+					"desc": "",
+					"quantity": 0
+				},
+				{
+					"name": "비터캔스(실러캔스)",
+					"type": "fish",
+					"desc": "",
+					"quantity": 0
+				},
+				{
+					"name": "솔라나귀(아귀)",
+					"type": "fish",
+					"desc": "",
+					"quantity": 0
+				},
+				{
+					"name": "배럴리움(배럴아이/통안어)",
+					"type": "fish",
+					"desc": "",
+					"quantity": 0
+				},
+				{
+					"name": "에이브새치(청새치)",
+					"type": "fish",
+					"desc": "",
+					"quantity": 0
+				},
+				{
+					"name": "링크진주조개",
+					"type": "fish",
+					"desc": "",
+					"quantity": 0
+				}
+			],
+			"fishing_rods": [
+				{
+					"name": "초보자 낚시대",
+					"durability": 100,
+					"equipped": 1
+				},
+				{
+					"name": "독일산 목재 낚싯대",
+					"durability": 0,
+					"equipped": 0
+				},
+				{
+					"name": "중국산 대나무 낚싯대",
+					"durability": 0,
+					"equipped": 0
+				},
+				{
+					"name": "독일산 카본 낚싯대",
+					"durability": 0,
+					"equipped": 0
+				},
+				{
+					"name": "중국산 탄소섬유 낚싯대",
+					"durability": 0,
+					"equipped": 0
+				},
+				{
+					"name": "독일산 글라스 파이버 낚싯대",
+					"durability": 0,
+					"equipped": 0
+				},
+				{
+					"name": "중국산 유리섬유 낚싯대",
+					"durability": 0,
+					"equipped": 0
+				}
+			]
+		},
+		"hunger": 0,
+		"current_depth_level": "shallow",
+		"game_progress": {
+			"date": 0,
+			"time_of_day": "morning"
+		},
+		"ranking": {
+			"rank": 0,
+			"earnings": 0
+		}
+	}
+}

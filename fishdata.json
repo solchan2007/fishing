@@ -1,0 +1,258 @@
+{
+	"fishes": [
+		{
+			"name": "봉크붕어",
+			"grade": "shallow",
+			"upbit": "USDT-BONK",
+			"coinname": "봉크",
+			"available": 0
+		},
+		{
+			"name": "플로키라미(피라미)",
+			"grade": "shallow",
+			"upbit": "",
+			"coinname": "플로키",
+			"available": 0
+		},
+		{
+			"name": "델리잉어",
+			"grade": "shallow",
+			"upbit": "",
+			"coinname": "델리",
+			"available": 0
+		},
+		{
+			"name": "센트탱(블루탱)",
+			"grade": "shallow",
+			"upbit": "",
+			"coinname": "센트탱",
+			"available": 0
+		},
+		{
+			"name": "카이아멸치",
+			"grade": "shallow",
+			"upbit": "",
+			"coinname": "카이아",
+			"available": 0
+		},
+		{
+			"name": "페페갱이(전갱이)",
+			"grade": "shallow",
+			"upbit": "USDT-PEPE",
+			"coinname": "페페",
+			"available": 0
+		},
+		{
+			"name": "도지농어",
+			"grade": "shallow",
+			"upbit": "KRW-DOGE",
+			"coinname": "도지",
+			"available": 1,
+			"desc": ""
+		},
+		{
+			"name": "셀로징어(오징어)",
+			"grade": "shallow",
+			"upbit": "KRW-CELO",
+			"coinname": "셀로",
+			"available": 1,
+			"desc": ""
+		},
+		{
+			"name": "보라나비(나비고기)",
+			"grade": "shallow",
+			"upbit": "KRW-BORA",
+			"coinname": "보라",
+			"available": 1,
+			"desc": ""
+		},
+		{
+			"name": "리플넙치",
+			"grade": "shallow",
+			"upbit": "KRW-XRP",
+			"coinname": "리플",
+			"available": 1,
+			"desc": ""
+		},
+		{
+			"name": "플레파리(해파리)",
+			"grade": "shallow",
+			"upbit": "",
+			"coinname": "플레어",
+			"available": 0
+		},
+		{
+			"name": "스타크해마",
+			"grade": "shallow",
+			"upbit": "",
+			"coinname": "스타크넷",
+			"available": 0
+		},
+		{
+			"name": "온동가리(흰동가리)",
+			"grade": "thermocline",
+			"upbit": "KRW-ONDO",
+			"coinname": "온도 파이낸스",
+			"available": 1,
+			"desc": ""
+		},
+		{
+			"name": "수이도미",
+			"grade": "thermocline",
+			"upbit": "KRW-SUI",
+			"coinname": "수이",
+			"available": 1,
+			"desc": ""
+		},
+		{
+			"name": "월드랑어(다랑어)",
+			"grade": "thermocline",
+			"upbit": "",
+			"coinname": "월드",
+			"available": 0
+		},
+		{
+			"name": "지토복어",
+			"grade": "thermocline",
+			"upbit": "",
+			"coinname": "지토",
+			"available": 0
+		},
+		{
+			"name": "에이프넙치",
+			"grade": "thermocline",
+			"upbit": "BTC-APE",
+			"coinname": "에이프",
+			"available": 0
+		},
+		{
+			"name": "에이다랑어",
+			"grade": "thermocline",
+			"upbit": "KRW-ADA",
+			"coinname": "에이다",
+			"available": 1,
+			"desc": ""
+		},
+		{
+			"name": "앱토랍스터",
+			"grade": "thermocline",
+			"upbit": "KRW-APT",
+			"coinname": "앱토스",
+			"available": 1,
+			"desc": ""
+		},
+		{
+			"name": "옵저버문어",
+			"grade": "thermocline",
+			"upbit": "BTC-OBSR",
+			"coinname": "옵저버",
+			"available": 0
+		},
+		{
+			"name": "케인돔(돌돔)",
+			"grade": "thermocline",
+			"upbit": "BTC-SPURS",
+			"coinname": "토트넘홋스퍼",
+			"available": 0
+		},
+		{
+			"name": "오닉스가오리",
+			"grade": "thermocline",
+			"upbit": "",
+			"coinname": "오닉스",
+			"available": 0
+		},
+		{
+			"name": "인젝티본장어(리본장어)",
+			"grade": "thermocline",
+			"upbit": "KRW-INJ",
+			"coinname": "인젝티브",
+			"available": 1,
+			"desc": ""
+		},
+		{
+			"name": "코스모스새우",
+			"grade": "thermocline",
+			"upbit": "KRW-ATOM",
+			"coinname": "코스모스",
+			"available": 1,
+			"desc": ""
+		},
+		{
+			"name": "쿠사마곰치",
+			"grade": "thermocline",
+			"upbit": "",
+			"coinname": "쿠사마",
+			"available": 0
+		},
+		{
+			"name": "펜들감펭(쏠배감펭)",
+			"grade": "thermocline",
+			"upbit": "KRW-PENDLE",
+			"coinname": "펜들",
+			"available": 1,
+			"desc": ""
+		},
+		{
+			"name": "비터캔스(실러캔스)",
+			"grade": "deep",
+			"upbit": "KRW-BTC",
+			"coinname": "비트코인",
+			"available": 1,
+			"desc": ""
+		},
+		{
+			"name": "솔라나귀(아귀)",
+			"grade": "deep",
+			"upbit": "KRW-SOL",
+			"coinname": "솔라나",
+			"available": 1,
+			"desc": ""
+		},
+		{
+			"name": "BNB상어",
+			"grade": "deep",
+			"upbit": "",
+			"coinname": "비앤비",
+			"available": 0
+		},
+		{
+			"name": "배럴리움(배럴아이/통안어)",
+			"grade": "deep",
+			"upbit": "이더리움",
+			"coinname": "KRW-ETH",
+			"available": 1,
+			"desc": ""
+		},
+		{
+			"name": "연파이낸산갈치",
+			"grade": "deep",
+			"upbit": "",
+			"coinname": "연파이낸스",
+			"available": 0
+		},
+		{
+			"name": "렌더만새기",
+			"grade": "deep",
+			"upbit": "BTC-RENDER",
+			"coinname": "렌더토큰",
+			"available": 0
+		},
+		{
+			"name": "에이브새치(청새치)",
+			"grade": "deep",
+			"upbit": "KRW-AAVE",
+			"coinname": "에이브",
+			"available": 1,
+			"desc": ""
+		},
+		{
+			"name": "링크진주조개",
+			"grade": "deep",
+			"upbit": "KRW-LINK",
+			"coinname": "체인링크",
+			"available": 1,
+			"desc": ""
+		}
+	]
+}

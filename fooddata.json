@@ -1,0 +1,70 @@
+{
+	"foods": [
+		{
+			"name": "꽁치 통조림",
+			"price": 550,
+			"full": 5,
+			"desc": ""
+		},
+		{
+			"name": "참치 초밥",
+			"price": 1000,
+			"full": 10,
+			"desc": ""
+		},
+		{
+			"name": "회 한점",
+			"price": 1500,
+			"full": 15,
+			"desc": ""
+		},
+		{
+			"name": "전어구이",
+			"price": 1850,
+			"full": 20,
+			"desc": ""
+		},
+		{
+			"name": "붕어빵",
+			"price": 2320,
+			"full": 25,
+			"desc": ""
+		},
+		{
+			"name": "해파리냉채",
+			"price": 2890,
+			"full": 30,
+			"desc": ""
+		},
+		{
+			"name": "똠양꿍",
+			"price": 3290,
+			"full": 35,
+			"desc": ""
+		},
+		{
+			"name": "만두",
+			"price": 3600,
+			"full": 40,
+			"desc": ""
+		},
+		{
+			"name": "월병",
+			"price": 4005,
+			"full": 45,
+			"desc": ""
+		},
+		{
+			"name": "탕후루",
+			"price": 4250,
+			"full": 50,
+			"desc": ""
+		},
+		{
+			"name": "마라탕",
+			"price": 4700,
+			"full": 55,
+			"desc": ""
+		}
+	]
+}
