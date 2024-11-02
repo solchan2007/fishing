@@ -1,8 +1,8 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from urllib.parse import urlparse, parse_qs
 from auth.user_auth import register, login, userinfo
-from core.check import check_inventory, market
-from core.save import fished_save, fished_clicked_save, purchase_item, sell_fish, eat_food, change_fishing_rod
+from core.check import check_inventory, market, leaderboard
+from core.save import fished_successed_save, fished_failed_save, purchase_item, sell_fish, eat_food, change_fishing_rod
 from json_util.json_io import json_data_to_dict, dict_to_json_data
 
 
@@ -28,9 +28,10 @@ class FishingServer(BaseHTTPRequestHandler):
 		print(service_query)
 		result = {}
 		# 상점 불러오기
-		if(service_name == "/v1/leaderboard"):
+		if(service_name == "/v1/market"):
 			result = market(service_query)
-		
+		elif(service_name == "/v1/leaderboard"):
+			result = leaderboard(service_query)
 		if result:
 			result_data = dict_to_json_data(result)
 			self.wfile.write(result_data.encode('utf-8'))
@@ -55,12 +56,12 @@ class FishingServer(BaseHTTPRequestHandler):
 		# 인벤토리 조회
 		elif(service_name == "/v1/game/inventory"):
 			result = check_inventory(dict_data)
-		# 낚시했을 때 저장
-		elif(service_name == "/v1/game/result"):
-			result = fished_save(dict_data)
-		# 낚시하기 버튼을 클릭했을 때 저장
-		elif(service_name == "/v1/game"):
-			result = fished_clicked_save(dict_data)
+		# 낚시 성공했을 때 저장
+		elif(service_name == "/v1/game/success"):
+			result = fished_successed_save(dict_data)
+		# 낚시 실패했을 때 저장
+		elif(service_name == "/v1/game/fail"):
+			result = fished_failed_save(dict_data)
 		# 아이템 구매했을 때 저장
 		elif(service_name == "/v1/market/item/buy"):
 			result = purchase_item(dict_data)

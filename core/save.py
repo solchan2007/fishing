@@ -1,19 +1,13 @@
 from json_util.json_io import dict_to_json_file, json_file_to_dict
 import json
-import pyupbit
+import pyupbit # type: ignore
+import random
 
 '''
-낚시했을 때 저장
+낚시 성공했을 때 저장(구현 완료, 예외 처리 완료)
 input
 {
-	"fishingSuccess" : true,
-	"fish" : "아무물고기" #잡은 물고기
-	"userId" : "player1" #유저 이름
-	"equipped": { #장착한 장비
-		"fishingRod": "초보자 낚시대" #낚시대
-    	"durability": 95 #내구도
-    }
-    "hunger" : 95
+	"username": "username", // 유저 이름
 }
 output
 {
@@ -22,23 +16,52 @@ output
 }
 '''
 
-def fished_save(save_info: dict):
+def fished_successed_save(save_info: dict):
 	data_dict = json_file_to_dict()
-	fish = save_info['fish']
-	username = save_info['userId']
-	equipped = save_info['equipped']
-	hunger = save_info['hunger']
+	username = save_info['username']
 	result = {"success": False, "errormessage": ""}
 	if(username in data_dict):
-		data_dict[username]['hunger'] = hunger
 		i = 0
-		while(i<len(data_dict[username]['inventory']['fishing_rods']) and equipped['fishingRod'] != data_dict[username]['inventory']['fishing_rods'][i]['name']):
+		while(i < len(data_dict[username]['inventory']['fishing_rods']) and data_dict[username]['inventory']['fishing_rods'][i]['equipped'] != 1):
 			i += 1
-		print(i)
-		data_dict[username]['inventory']['fishing_rods'][i]['durability'] = equipped['durability']
-		if(fish != ""):
-			data_dict[username]['inventory']['fish'].append(fish)
-		result.update({"success": True, "errormessage": ""})
+		if(i < len(data_dict[username]['inventory']['fishing_rods'])):
+			# 물고기 정보 불러오기
+			file1 = open("fishdata.json", "r", encoding='UTF-8')
+			jsondata1 = json.load(file1)
+			file1.close()
+			possible_fishes = []
+			if(data_dict[username]['inventory']['fishing_rods'][i]['grade'] == 'shallow'):
+				for fish in jsondata1['fishes']:
+					if(fish['grade'] == 'shallow' and fish['available'] == 1):
+						possible_fishes.append(fish)
+			elif(data_dict[username]['inventory']['fishing_rods'][i]['grade'] == 'thermocline'):
+				for fish in jsondata1['fishes']:
+					if(fish['grade'] == 'shallow' and fish['available'] == 1):
+						possible_fishes.append(fish)
+					if(fish['grade'] == 'thermocline' and fish['available'] == 1):
+						possible_fishes.append(fish)
+			elif(data_dict[username]['inventory']['fishing_rods'][i]['grade'] == 'deep'):
+				for fish in jsondata1['fishes']:
+					if(fish['grade'] == 'shallow' and fish['available'] == 1):
+						possible_fishes.append(fish)
+					if(fish['grade'] == 'thermocline' and fish['available'] == 1):
+						possible_fishes.append(fish)
+					if(fish['grade'] == 'deep' and fish['available'] == 1):
+						possible_fishes.append(fish)
+			
+			catched_fish = possible_fishes[random.randint(0, len(possible_fishes) - 1)]
+			j = 0
+			while(j<len(data_dict[username]['inventory']['items']) and catched_fish['name'] != data_dict[username]['inventory']['items'][j]['name']):
+				j += 1
+			if(data_dict[username]['inventory']['fishing_rods'][i]['durability'] >= 5):
+				data_dict[username]['inventory']['fishing_rods'][i]['durability'] -= 5
+				data_dict[username]['inventory']['items'][j]['quantity'] += 1
+				result.update({"success": True, "errormessage": ""})
+			else:
+				result.update({"success": False, "errormessage": "낚싯대의 내구도가 부족하여 낚시하지 못했습니다."})
+			dict_to_json_file(data_dict)
+		else:
+			result.update({"success": False, "errormessage": "장착된 낚싯대를 찾을 수 없습니다."})
 	else:
 		result.update({"success": False, "errormessage": "존재하지 않는 아이디입니다."})
 	
@@ -46,15 +69,10 @@ def fished_save(save_info: dict):
 	return result
 
 '''
-낚시하기 버튼을 클릭했을 때 저장
+낚시 실패했을 때 저장(구현 완료, 예외 처리 완료)
 input
 {
-	"userId": "player1", #유저 이름
-	"equipped": { #장착한 장비
-        "fishingRod": "초보자 낚시대", #낚시대
-        "durability": 95, #내구도
-        "depthLevel": "shallow" #수심 레벨
-    }
+	"username": "username"
 }
 output
 {
@@ -62,25 +80,30 @@ output
 	"errormessage":  #에러 메세지
 }
 '''
-def fished_clicked_save(save_info: dict):
+def fished_failed_save(save_info: dict):
 	data_dict = json_file_to_dict()
-	username = save_info['userId']
-	equipped = save_info['equipped']
+	username = save_info['username']
 	result = {"success": False, "errormessage": ""}
 	if(username in data_dict):
 		i = 0
-		while(i<len(data_dict[username]['inventory']['fishing_rods']) and equipped['fishingRod'] != data_dict[username]['inventory']['fishing_rods'][i]['name']):
+		while(i < len(data_dict[username]['inventory']['fishing_rods']) and data_dict[username]['inventory']['fishing_rods'][i]['equipped'] != 1):
 			i += 1
-		print(i)
-		data_dict[username]['inventory']['fishing_rods'][i]['durability'] = equipped['durability']
-		result.update({"success": True, "errormessage": ""})
+		if(i < len(data_dict[username]['inventory']['fishing_rods'])):
+			if(data_dict[username]['inventory']['fishing_rods'][i]['durability'] >= 5):
+				data_dict[username]['inventory']['fishing_rods'][i]['durability'] -= 5
+			else:
+				data_dict[username]['inventory']['fishing_rods'][i]['durability'] = 0
+			result.update({"success": True, "errormessage": ""})
+		else:
+			result.update({"success": False, "errormessage": "장착된 낚싯대를 찾을 수 없습니다."})
 	else:
 		result.update({"success": False, "errormessage": "존재하지 않는 아이디입니다."})
+	
 	dict_to_json_file(data_dict)
 	return result
 
 '''
-상점에서 아이템 샀을 때 저장
+상점에서 아이템 샀을 때 저장(구현 완료)
 input
 {
 	"username": "username", #유저 이름
@@ -141,7 +164,7 @@ def purchase_item(saveinfo: dict):
 	
 
 '''
-물고기 팔았을 때 저장
+물고기 팔았을 때 저장(구현 완료, 예외 처리 완료)
 input
 {
 	"username": "username",
@@ -156,7 +179,7 @@ output
 '''
 def sell_fish(saveinfo: dict):
 	data_dict = json_file_to_dict()
-	# 낚싯대 정보 불러오기
+	# 물고기 정보 불러오기
 	file1 = open("fishdata.json", "r", encoding='UTF-8')
 	jsondata1 = json.load(file1)
 	file1.close()
@@ -169,6 +192,7 @@ def sell_fish(saveinfo: dict):
 		i = 0
 		while(i<len(jsondata1['fishes']) and fishname != jsondata1['fishes'][i]['name']):
 			i += 1
+		# 코인 시세 불러오기
 		upbitcoinprice = pyupbit.get_current_price(jsondata1['fishes'][i]['upbit'])
 		print(upbitcoinprice)
 		j = 0
@@ -176,14 +200,15 @@ def sell_fish(saveinfo: dict):
 			j += 1
 		if(data_dict[username]['inventory']['items'][j]['quantity'] >= quantity):
 			data_dict[username]['inventory']['items'][j]['quantity'] -= quantity
-			data_dict[username]['prict'] += upbitcoinprice * quantity
+			data_dict[username]['price'] += upbitcoinprice * quantity
+			dict_to_json_file(data_dict)
 		else:
 			result = {"success": False, "errormessage": "수량이 부족하여 판매하지 못했습니다."}
 	else:
 		result = {"success": False, "errormessage": "존재하지 않는 아이디입니다."}
 	return result
 '''
-음식 먹었을 때 저장
+음식 먹었을 때 저장(구현 완료, 예외 처리 완료)
 input
 {
 	"userId": "player1", #유저 이름
@@ -236,7 +261,7 @@ def eat_food(saveinfo: dict):
 	return result
 
 '''
-낚싯대 장착할 때 저장
+낚싯대 장착할 때 저장(구현 완료)
 input
 {
 	"username": "username", // 유저 이름

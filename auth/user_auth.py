@@ -33,7 +33,8 @@ def register(register_info: dict):
 					{
 						"name": "초보자 낚시대",
 						"durability": 100,
-						"equipped": 1
+						"equipped": 1,
+						"grade": "shallow"
 					}
 				]
 			},
@@ -67,7 +68,7 @@ def register(register_info: dict):
 			if(fish['available']):
 				data_dict[username]['inventory']['items'].append({"name": fish['name'], "type": "fish", "desc": fish['desc'], "quantity": 0})
 		for fishingrod in jsondata3['fishing_rods']:
-			data_dict[username]['inventory']['fishing_rods'].append({"name": fishingrod['name'], "durability": 0, "equipped": 0})
+			data_dict[username]['inventory']['fishing_rods'].append({"name": fishingrod['name'], "durability": 0, "equipped": 0, "grade": fishingrod['grade']})
 		result.update({"success": True})
 	dict_to_json_file(data_dict)
 	return result
