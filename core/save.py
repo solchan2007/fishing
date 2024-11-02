@@ -213,19 +213,27 @@ def eat_food(saveinfo: dict):
 
 		if((data_dict[username]['hunger'] + jsondata1['foods'][i]['full']) > 100):
 			j = 0
-			while(j<len(data_dict[username]['inventory']['food']) and foodname != data_dict[username]['inventory']['food'][j]['name']):
+			while(j<len(data_dict[username]['inventory']['items']) and foodname != data_dict[username]['inventory']['items'][j]['name']):
 				j += 1
-			del data_dict[username]['inventory']['food'][j]
-			data_dict[username]['hunger'] = 100
+			if(data_dict[username]['inventory']['items'][j]['quantity'] > 0):
+				data_dict[username]['inventory']['items'][j]['quantity'] -= 1
+				data_dict[username]['hunger'] = 100
+				result = {"success": True, "errormessage": ""}
+			else:
+				result = {"success": False, "errormessage": "수량이 부족하여 먹기에 실패하였습니다."}
 		else:
 			j = 0
-			while(j<len(data_dict[username]['inventory']['food']) and foodname != data_dict[username]['inventory']['food'][j]['name']):
+			while(j<len(data_dict[username]['inventory']['items']) and foodname != data_dict[username]['inventory']['items'][j]['name']):
 				j += 1
-			del data_dict[username]['inventory']['food'][j]
-			data_dict[username]['hunger'] += jsondata1['foods'][i]['full']
-		result = {"success": True, "errormessage": ""}
+			if(data_dict[username]['inventory']['items'][j]['quantity'] > 0):
+				data_dict[username]['inventory']['items'][j]['quantity'] -= 1
+				data_dict[username]['hunger'] += jsondata1['foods'][i]['full']
+				result = {"success": True, "errormessage": ""}
+			else:
+				result = {"success": False, "errormessage": "수량이 부족하여 먹기에 실패하였습니다."}
 	else:
 		result = {"success": False, "errormessage": "존재하지 않는 아이디입니다."}
+	return result
 
 '''
 낚싯대 장착할 때 저장
@@ -246,8 +254,17 @@ def change_fishing_rod(saveinfo: dict):
 	fishingrod = saveinfo['fishing_rod']
 	result = {"success": False, "errormessage": ""}
 	if(username in data_dict):
-		data_dict[username]['inventory']['equipped']['fishing_rod'] = fishingrod
-		result.update({"success": True, "errormessage": ""})
+		i = 0
+		while(i < len(data_dict[username]['inventory']['fishing_rods']) and fishingrod != data_dict[username]['inventory']['fishing_rods'][i]['name']):
+			i += 1
+		while(j < len(data_dict[username]['inventory']['fishing_rods']) and data_dict[username]['inventory']['fishing_rods'][j]['equipped'] != 1):
+			j += 1
+		if(data_dict[username]['inventory']['fishing_rods'][i]['durability'] > 0):
+			data_dict[username]['inventory']['fishing_rods'][j]['equipped'] = 0
+			data_dict[username]['inventory']['fishing_rods'][i]['equipped'] = 1
+			result.update({"success": True, "errormessage": ""})
+		else:
+			result.update({"success": False, "errormessage": "내구도가 부족하여 낚싯대를 장착하지 못했습니다."})
 		dict_to_json_file(data_dict)
 	else:
 		result.update({"success": False, "errormessage": "존재하지 않는 아이디입니다."})

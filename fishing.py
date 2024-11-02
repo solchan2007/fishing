@@ -1,7 +1,7 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from urllib.parse import urlparse, parse_qs
 from auth.user_auth import register, login, userinfo
-from core.check import check_inventory
+from core.check import check_inventory, market
 from core.save import fished_save, fished_clicked_save, purchase_item, sell_fish, eat_food, change_fishing_rod
 from json_util.json_io import json_data_to_dict, dict_to_json_data
 
@@ -25,7 +25,15 @@ class FishingServer(BaseHTTPRequestHandler):
 	def do_GET(self):
 		self.make_header()
 		service_name, service_query = self.divide_path()
+		print(service_query)
 		result = {}
+		# 상점 불러오기
+		if(service_name == "/v1/leaderboard"):
+			result = market(service_query)
+		
+		if result:
+			result_data = dict_to_json_data(result)
+			self.wfile.write(result_data.encode('utf-8'))
 	
 	def do_POST(self):
 		self.make_header()
@@ -45,7 +53,7 @@ class FishingServer(BaseHTTPRequestHandler):
 		elif(service_name == "/v1/game/load"):
 			result = userinfo(dict_data)
 		# 인벤토리 조회
-		elif(service_name == "/v1/game/inventory_check"):
+		elif(service_name == "/v1/game/inventory"):
 			result = check_inventory(dict_data)
 		# 낚시했을 때 저장
 		elif(service_name == "/v1/game/result"):

@@ -1,4 +1,5 @@
 from json_util.json_io import dict_to_json_file, json_file_to_dict
+import json
 
 """
 인벤토리 조회
@@ -26,3 +27,17 @@ def check_inventory(check_info: dict):
 		result.update({"success": False, "errormessage": "존재하지 않는 아이디입니다."})
 		
 	return result
+
+def market(check_info: dict):
+	# 음식 정보 불러오기
+	file1 = open("fooddata.json", "r", encoding='UTF-8')
+	jsondata1 = json.load(file1)
+	file1.close()
+	# 낚싯대 정보 불러오기
+	file2 = open("fishingroddata.json", "r", encoding='UTF-8')
+	jsondata2 = json.load(file2)
+	file2.close()
+	fishes = check_info['fishes']
+
+	for fish in fishes:
+		i = 0
