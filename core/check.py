@@ -30,7 +30,7 @@ def check_inventory(check_info: dict):
 	return result
 
 '''
-상점 조회(구현 완료)
+상점 조회(구현 완료, 물고기 10개 이하 조건 추가 완료)
 input
 {
 	"username": "username",
@@ -57,14 +57,14 @@ def market(check_info: dict):
 	result = {"success": False, "errormessage": ""}
 
 	load_fishes = []
+	available_check_fish = 10
 	for fish in fishes:
 		i = 0
 		while(i < len(jsondata1['fishes']) and fish != jsondata1['fishes'][i]['name']):
 			i += 1
-		if(i < len(jsondata1['fishes'])):
+		if(i < len(jsondata1['fishes']) and available_check_fish > 0):
+			available_check_fish -= 1
 			load_fishes.append({"name": jsondata1['fishes'][i]['name'], "price": pyupbit.get_current_price(jsondata1['fishes'][i]['upbit'])})
-		else:
-			load_fishes.append({"name": "unavailable fish", "price": 0})
 	result.update({"success": True, "errormessage": "", "fishes": load_fishes})
 	return result
 
@@ -96,7 +96,7 @@ def leaderboard(check_info: dict):
 	for i in range(len(ranking)):
 		for j in range(i, len(ranking)):
 			if(ranking[i]['score'] < ranking[j]['score']):
-				ranking[i]['score'], ranking[j]['score'] = ranking[j]['score'], ranking[i]['score']
+				ranking[i], ranking[j] = ranking[j], ranking[i]
 	
 	for i in range(len(ranking)):
 		data_dict[ranking[i]['username']]['ranking'] = i + 1

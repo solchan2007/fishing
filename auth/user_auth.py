@@ -31,14 +31,14 @@ def register(register_info: dict):
 				"items": [],
 				"fishing_rods": [
 					{
-						"name": "초보자 낚시대",
+						"name": "초보자 낚싯대",
 						"durability": 100,
 						"equipped": 1,
 						"grade": "shallow"
 					}
 				]
 			},
-			"hunger": 0,
+			"hunger": 100,
 			"current_depth_level": "shallow",
 			"game_progress": {
 				"date": 0,

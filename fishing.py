@@ -66,7 +66,7 @@ class FishingServer(BaseHTTPRequestHandler):
 		elif(service_name == "/v1/market/item/buy"):
 			result = purchase_item(dict_data)
 		# 물고기 팔 때 저장
-		elif(service_name == "/v1/market/fish/sale"):
+		elif(service_name == "/v1/market/fish/sell"):
 			result = sell_fish(dict_data)
 		# 음식 먹을 때 저장
 		elif(service_name == "/v1/food"):
