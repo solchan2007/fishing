@@ -91,5 +91,6 @@ def test_divide_path(str) -> tuple:
 # print(test_divide_path("https://localhost:3000/v1/game/save?id=aaaa&password=bbbb"))	
 
 server_address = ('localhost', 8080)
+print(f"서버가 {server_address[0]}:{server_address[1]}에서 열렸습니다.")
 httpd = HTTPServer(server_address, FishingServer)
 httpd.serve_forever()

@@ -64,7 +64,10 @@ def market(check_info: dict):
 			i += 1
 		if(i < len(jsondata1['fishes']) and available_check_fish > 0):
 			available_check_fish -= 1
-			load_fishes.append({"name": jsondata1['fishes'][i]['name'], "price": pyupbit.get_current_price(jsondata1['fishes'][i]['upbit'])})
+			# 코인 시세 불러오기
+			upbitcoinprice = pyupbit.get_current_price(jsondata1['fishes'][i]['upbit'])
+			print(f'{jsondata1['fishes'][i]['upbit']} 가격: {upbitcoinprice}')
+			load_fishes.append({"name": jsondata1['fishes'][i]['name'], "price": upbitcoinprice})
 	result.update({"success": True, "errormessage": "", "fishes": load_fishes})
 	return result
 
