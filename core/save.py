@@ -94,9 +94,16 @@ def fished_failed_save(save_info: dict):
 			i += 1
 		if(i < len(data_dict[username]['inventory']['fishing_rods'])):
 			if(data_dict[username]['inventory']['fishing_rods'][i]['durability'] >= 5):
-				data_dict[username]['hunger'] -= 5
+				if(data_dict[username]['hunger'] >= 5):
+					data_dict[username]['hunger'] -= 5
+				else:
+					data_dict[username]['hunger'] = 0
 				data_dict[username]['inventory']['fishing_rods'][i]['durability'] -= 5
 			else:
+				if(data_dict[username]['hunger'] >= 5):
+					data_dict[username]['hunger'] -= 5
+				else:
+					data_dict[username]['hunger'] = 0
 				data_dict[username]['inventory']['fishing_rods'][i]['durability'] = 0
 			result.update({"success": True, "errormessage": ""})
 		else:
