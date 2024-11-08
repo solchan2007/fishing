@@ -54,10 +54,13 @@ def fished_successed_save(save_info: dict):
 			while(j<len(data_dict[username]['inventory']['items']) and catched_fish['name'] != data_dict[username]['inventory']['items'][j]['name']):
 				j += 1
 			if(data_dict[username]['inventory']['fishing_rods'][i]['durability'] >= 5):
-				data_dict[username]['hunger'] -= 5
-				data_dict[username]['inventory']['fishing_rods'][i]['durability'] -= 5
-				data_dict[username]['inventory']['items'][j]['quantity'] += 1
-				result.update({"success": True, "errormessage": ""})
+				if(data_dict[username]['hunger'] >= 5):
+					data_dict[username]['hunger'] -= 5
+					data_dict[username]['inventory']['fishing_rods'][i]['durability'] -= 5
+					data_dict[username]['inventory']['items'][j]['quantity'] += 1
+					result.update({"success": True, "errormessage": ""})
+				else:
+					result.update({"success": False, "errormessage": "배고픔이 부족하여 낚시하지 못했습니다."})
 			else:
 				result.update({"success": False, "errormessage": "낚싯대의 내구도가 부족하여 낚시하지 못했습니다."})
 			dict_to_json_file(data_dict)
