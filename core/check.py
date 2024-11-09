@@ -23,6 +23,11 @@ def check_inventory(check_info: dict):
 	result = {"success": False, "errormessage": ""}
 	if(username in data_dict):
 		result['items'] = data_dict[username]['inventory']['items']
+		for fishing_rod in data_dict[username]['inventory']['fishing_rods']:
+			fishingrod = fishing_rod
+			fishingrod['type'] = 'fishing_rod'
+			fishingrod['desc'] = ''
+			result['items'].append(fishingrod)
 		result.update({"success": True, "errormessage": ""})
 	else:
 		result.update({"success": False, "errormessage": "존재하지 않는 아이디입니다."})
