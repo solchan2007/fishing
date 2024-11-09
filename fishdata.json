@@ -219,8 +219,8 @@
 		{
 			"name": "배럴리움(배럴아이/통안어)",
 			"grade": "deep",
-			"upbit": "이더리움",
-			"coinname": "KRW-ETH",
+			"upbit": "KRW-ETH",
+			"coinname": "이더리움",
 			"available": 1,
 			"desc": ""
 		},
