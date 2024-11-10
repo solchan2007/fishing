@@ -26,13 +26,13 @@ def register(register_info: dict):
 		data_dict[username] = {
 			"username": username,
 			"password": password,
-			"price": 0,
+			"price": 50000,
 			"inventory": {
 				"items": [],
 				"fishing_rods": [
 					{
 						"name": "초보자 낚싯대",
-						"durability": 100,
+						"durability": 400,
 						"equipped": 1,
 						"grade": "shallow"
 					}

@@ -48,8 +48,8 @@ output
 {
 	"success": true
 	"fishes": [
-		{"name": "name", "price": 2000}, // 검색한것에 대해서만 출력
-		{"name": "name", "price": 2000},
+		{"name": "name", "price": 2000, "grade": "deep", "quantity": 5}, // 검색한것에 대해서만 출력
+		{"name": "name", "price": 2000, "grade": "deep", "quantity": 5},
 	]
 }
 '''
@@ -72,7 +72,7 @@ def market(check_info: dict):
 			# 코인 시세 불러오기
 			upbitcoinprice = pyupbit.get_current_price(jsondata1['fishes'][i]['upbit'])
 			print(f'{jsondata1['fishes'][i]['upbit']} 가격: {upbitcoinprice}')
-			load_fishes.append({"name": jsondata1['fishes'][i]['name'], "price": upbitcoinprice})
+			load_fishes.append({"name": jsondata1['fishes'][i]['name'], "price": upbitcoinprice, "grade": jsondata1['fishes'][i]['grade'], "quantity": jsondata1['fishes'][i]['quantity']})
 	result.update({"success": True, "errormessage": "", "fishes": load_fishes})
 	return result
 
