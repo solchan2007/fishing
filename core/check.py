@@ -1,6 +1,7 @@
 from json_util.json_io import dict_to_json_file, json_file_to_dict
 import json
 import pyupbit # type: ignore
+import time
 
 """
 인벤토리 조회(구현 완료)
@@ -19,19 +20,21 @@ output
 """
 def check_inventory(check_info: dict):
 	data_dict = json_file_to_dict()
-	username = check_info['username']
 	result = {"success": False, "errormessage": ""}
-	if(username in data_dict):
-		result['items'] = data_dict[username]['inventory']['items']
-		for fishing_rod in data_dict[username]['inventory']['fishing_rods']:
-			fishingrod = fishing_rod
-			fishingrod['type'] = 'fishing_rod'
-			fishingrod['desc'] = ''
-			result['items'].append(fishingrod)
-		result.update({"success": True, "errormessage": ""})
+	if('username' in check_info):
+		username = check_info['username']
+		if(username in data_dict):
+			result['items'] = data_dict[username]['inventory']['items']
+			for fishing_rod in data_dict[username]['inventory']['fishing_rods']:
+				fishingrod = fishing_rod
+				fishingrod['type'] = 'fishing_rod'
+				fishingrod['desc'] = ''
+				result['items'].append(fishingrod)
+			result.update({"success": True, "errormessage": ""})
+		else:
+			result.update({"success": False, "errormessage": "존재하지 않는 아이디입니다."})
 	else:
-		result.update({"success": False, "errormessage": "존재하지 않는 아이디입니다."})
-		
+		result.update({"success": False, "errormessage": "username이 누락되었습니다."})
 	return result
 
 '''
@@ -48,8 +51,8 @@ output
 {
 	"success": true
 	"fishes": [
-		{"name": "name", "price": 2000, "grade": "deep", "quantity": 5}, // 검색한것에 대해서만 출력
-		{"name": "name", "price": 2000, "grade": "deep", "quantity": 5},
+		{"name": "name", "price": 2000, "grade": "deep"}, // 검색한것에 대해서만 출력
+		{"name": "name", "price": 2000, "grade": "deep"},
 	]
 }
 '''
@@ -58,22 +61,34 @@ def market(check_info: dict):
 	file1 = open("fishdata.json", "r", encoding='UTF-8')
 	jsondata1 = json.load(file1)
 	file1.close()
-	fishes = check_info['fishes']
 	result = {"success": False, "errormessage": ""}
-
-	load_fishes = []
-	available_check_fish = 10
-	for fish in fishes:
-		i = 0
-		while(i < len(jsondata1['fishes']) and fish != jsondata1['fishes'][i]['name']):
-			i += 1
-		if(i < len(jsondata1['fishes']) and available_check_fish > 0):
-			available_check_fish -= 1
-			# 코인 시세 불러오기
-			upbitcoinprice = pyupbit.get_current_price(jsondata1['fishes'][i]['upbit'])
-			print(f'{jsondata1['fishes'][i]['upbit']} 가격: {upbitcoinprice}')
-			load_fishes.append({"name": jsondata1['fishes'][i]['name'], "price": upbitcoinprice, "grade": jsondata1['fishes'][i]['grade'], "quantity": jsondata1['fishes'][i]['quantity']})
-	result.update({"success": True, "errormessage": "", "fishes": load_fishes})
+	if('fishes' in check_info):
+		fishes = check_info['fishes']
+		load_fishes = []
+		available_check_fish = 10
+		for fish in fishes:
+			i = 0
+			while(i < len(jsondata1['fishes']) and fish != jsondata1['fishes'][i]['name']):
+				i += 1
+			if(i < len(jsondata1['fishes']) and available_check_fish > 0):
+				available_check_fish -= 1
+				# 코인 시세 불러오기
+				upbitcoinprice = pyupbit.get_current_price(jsondata1['fishes'][i]['upbit'])
+				print(f'{jsondata1['fishes'][i]['upbit']} 가격: {upbitcoinprice}')
+				load_fishes.append({"name": jsondata1['fishes'][i]['name'], "price": upbitcoinprice, "grade": jsondata1['fishes'][i]['grade']})
+			else:
+				time.sleep(1)
+				available_check_fish = 10
+				if(i < len(jsondata1['fishes'])):
+					available_check_fish -= 1
+					# 코인 시세 불러오기
+					upbitcoinprice = pyupbit.get_current_price(jsondata1['fishes'][i]['upbit'])
+					print(f'{jsondata1['fishes'][i]['upbit']} 가격: {upbitcoinprice}')
+					load_fishes.append({"name": jsondata1['fishes'][i]['name'], "price": upbitcoinprice, "grade": jsondata1['fishes'][i]['grade']})
+		result.update({"success": True, "errormessage": "", "fishes": load_fishes})
+	else:
+		load_fishes = []
+		result.update({"success": True, "errormessage": "", "fishes": load_fishes})
 	return result
 
 '''
@@ -95,22 +110,37 @@ output
 '''
 def leaderboard(check_info: dict):
 	data_dict = json_file_to_dict()
-	username = check_info['username'][0]
-	ranking = []
 	result = {"success": False, "errormessage": ""}
-	for name in data_dict.keys():
-		ranking.append({"username": name, "score": data_dict[name]['price']})
-	
-	for i in range(len(ranking)):
-		for j in range(i, len(ranking)):
-			if(ranking[i]['score'] < ranking[j]['score']):
-				ranking[i], ranking[j] = ranking[j], ranking[i]
-	
-	for i in range(len(ranking)):
-		data_dict[ranking[i]['username']]['ranking'] = i + 1
-	dict_to_json_file(data_dict)
-	if(username in data_dict):
-		result.update({"success": True, "errormessage": "", "rank": data_dict[username]['ranking'], "ranking": ranking})
+	if('username' in check_info):
+		username = check_info['username'][0]
+		ranking = []
+		for name in data_dict.keys():
+			ranking.append({"username": name, "score": data_dict[name]['price']})
+		
+		for i in range(len(ranking)):
+			for j in range(i, len(ranking)):
+				if(ranking[i]['score'] < ranking[j]['score']):
+					ranking[i], ranking[j] = ranking[j], ranking[i]
+		
+		for i in range(len(ranking)):
+			data_dict[ranking[i]['username']]['ranking'] = i + 1
+		dict_to_json_file(data_dict)
+		if(username in data_dict):
+			result.update({"success": True, "errormessage": "", "rank": data_dict[username]['ranking'], "ranking": ranking})
+		else:
+			result.update({"success": False, "errormessage": "검색하신 유저가 존재하지 않습니다.", "rank": 0, "ranking": ranking})
 	else:
-		result.update({"success": False, "errormessage": "검색하신 유저가 존재하지 않습니다.", "rank": 0, "ranking": ranking})
+		ranking = []
+		for name in data_dict.keys():
+			ranking.append({"username": name, "score": data_dict[name]['price']})
+		
+		for i in range(len(ranking)):
+			for j in range(i, len(ranking)):
+				if(ranking[i]['score'] < ranking[j]['score']):
+					ranking[i], ranking[j] = ranking[j], ranking[i]
+		
+		for i in range(len(ranking)):
+			data_dict[ranking[i]['username']]['ranking'] = i + 1
+		dict_to_json_file(data_dict)
+		result.update({"success": False, "errormessage": "username 값이 누락되었습니다.", "rank": 0, "ranking": ranking})
 	return result
