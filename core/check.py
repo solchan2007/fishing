@@ -19,9 +19,9 @@ output
 }
 """
 def check_inventory(check_info: dict):
-	data_dict = json_file_to_dict()
 	result = {"success": False, "errormessage": ""}
 	if('username' in check_info):
+		data_dict = json_file_to_dict()
 		username = check_info['username']
 		if(username in data_dict):
 			result['items'] = data_dict[username]['inventory']['items']
@@ -57,12 +57,12 @@ output
 }
 '''
 def market(check_info: dict):
-	# 물고기 정보 불러오기
-	file1 = open("fishdata.json", "r", encoding='UTF-8')
-	jsondata1 = json.load(file1)
-	file1.close()
 	result = {"success": False, "errormessage": ""}
 	if('fishes' in check_info):
+		# 물고기 정보 불러오기
+		file1 = open("fishdata.json", "r", encoding='UTF-8')
+		jsondata1 = json.load(file1)
+		file1.close()
 		fishes = check_info['fishes']
 		load_fishes = []
 		available_check_fish = 10
