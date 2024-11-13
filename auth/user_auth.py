@@ -153,11 +153,13 @@ def userinfo(user_info: dict):
 	data_dict = json_file_to_dict()
 	username = user_info['username']
 	result = {"success": False, "errormessage": ""}
-
-	if(username in data_dict):
-		result.update(data_dict[username])
-		del result['password']
-		result.update({"success": True, "errormessage": ""})
+	if('username' in user_info):
+		if(username in data_dict):
+			result.update(data_dict[username])
+			del result['password']
+			result.update({"success": True, "errormessage": ""})
+		else:
+			result.update({"success": False, "errormessage": "존재하지 않는 아이디입니다."})
 	else:
-		result.update({"success": False, "errormessage": "존재하지 않는 아이디입니다."})
+		result.update({"success": False, "errormessage": "username 값이 누락되었습니다."})
 	return result
