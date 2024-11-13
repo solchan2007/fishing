@@ -5,6 +5,7 @@ from core.check import check_inventory, market, leaderboard
 from core.save import fished_successed_save, fished_failed_save, purchase_item, sell_fish, eat_food, change_fishing_rod
 from json_util.json_io import json_data_to_dict, dict_to_json_data
 
+server_address = ('localhost', 8080)
 
 class FishingServer(BaseHTTPRequestHandler):
 	def make_header(self):
@@ -90,7 +91,6 @@ def test_divide_path(str) -> tuple:
 
 # print(test_divide_path("https://localhost:3000/v1/game/save?id=aaaa&password=bbbb"))	
 
-server_address = ('localhost', 8080)
 print(f"서버가 {server_address[0]}:{server_address[1]}에서 열렸습니다.")
 httpd = HTTPServer(server_address, FishingServer)
 httpd.serve_forever()

@@ -222,19 +222,22 @@ def sell_fish(saveinfo: dict):
 			i = 0
 			while(i<len(jsondata1['fishes']) and fishname != jsondata1['fishes'][i]['name']):
 				i += 1
-			# 코인 시세 불러오기
-			upbitcoinprice = pyupbit.get_current_price(jsondata1['fishes'][i]['upbit'])
-			print(f'{jsondata1['fishes'][i]['upbit']} 가격: {upbitcoinprice}')
-			j = 0
-			while(j < len(data_dict[username]['inventory']['items']) and fishname != data_dict[username]['inventory']['items'][j]['name']):
-				j += 1
-			if(j < len(data_dict[username]['inventory']['items'])):
-				if(data_dict[username]['inventory']['items'][j]['quantity'] >= quantity):
-					data_dict[username]['inventory']['items'][j]['quantity'] -= quantity
-					data_dict[username]['price'] += upbitcoinprice * quantity
-					result = {"success": True, "errormessage": ""}
+			if(j < len(jsondata1['fishes'])):
+				# 코인 시세 불러오기
+				upbitcoinprice = pyupbit.get_current_price(jsondata1['fishes'][i]['upbit'])
+				print(f'{jsondata1['fishes'][i]['upbit']} 가격: {upbitcoinprice}')
+				j = 0
+				while(j < len(data_dict[username]['inventory']['items']) and fishname != data_dict[username]['inventory']['items'][j]['name']):
+					j += 1
+				if(j < len(data_dict[username]['inventory']['items'])):
+					if(data_dict[username]['inventory']['items'][j]['quantity'] >= quantity):
+						data_dict[username]['inventory']['items'][j]['quantity'] -= quantity
+						data_dict[username]['price'] += upbitcoinprice * quantity
+						result = {"success": True, "errormessage": ""}
+					else:
+						result = {"success": False, "errormessage": "수량이 부족하여 판매하지 못했습니다."}
 				else:
-					result = {"success": False, "errormessage": "수량이 부족하여 판매하지 못했습니다."}
+					result = {"success": False, "errormessage": "물고기 종류를 찾을 수 없습니다."}
 			else:
 				result = {"success": False, "errormessage": "물고기 종류를 찾을 수 없습니다."}
 		else:
