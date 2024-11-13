@@ -222,7 +222,7 @@ def sell_fish(saveinfo: dict):
 			i = 0
 			while(i<len(jsondata1['fishes']) and fishname != jsondata1['fishes'][i]['name']):
 				i += 1
-			if(j < len(jsondata1['fishes'])):
+			if(i < len(jsondata1['fishes'])):
 				# 코인 시세 불러오기
 				upbitcoinprice = pyupbit.get_current_price(jsondata1['fishes'][i]['upbit'])
 				print(f'{jsondata1['fishes'][i]['upbit']} 가격: {upbitcoinprice}')
