@@ -105,7 +105,6 @@ def login(login_info: dict):
 			result.update({"success": False, "errormessage": "존재하지 않는 아이디입니다."})
 	else:
 		result.update({"success": False, "errormessage": "username 또는 password 값이 누락되었습니다."})
-	print(result)
 	return result
 
 """
